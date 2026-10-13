@@ -22,6 +22,7 @@ def bmi_guidance(bmi):
         return {
             "label": "體重過重",
             "tone": "high",
+            "emphasis": "overweight",
             "advice": "可從減少含糖飲料、增加蔬菜與日常活動量開始，循序建立適合自己的健康習慣。",
         }
     return {

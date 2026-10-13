@@ -59,7 +59,7 @@
 
           <div class="hero-side">
             {% if result %}
-              <section class="result-panel {{ result.tone }}" aria-labelledby="result-title" aria-live="polite">
+              <section class="result-panel {{ result.tone }}{% if result.emphasis %} {{ result.emphasis }}{% endif %}" aria-labelledby="result-title" aria-live="polite">
                 <span class="panel-kicker">YOUR RESULT / 計算結果</span>
                 <div class="result-main">
                   <span class="result-number">{{ result.bmi }}</span>
