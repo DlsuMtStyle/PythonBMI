@@ -29,6 +29,8 @@ BMI = 體重（公斤）÷ 身高（公尺）²。分類採臺灣成人體位參
 
 `.github/workflows/deploy-azure.yml` 在 `main` 分支的應用程式、測試或 workflow 異動時執行，也可以從 GitHub Actions 手動觸發。流程會在 Windows runner 上執行測試、下載官方 Python 3.14.8 可嵌入版本，將 Python 與相依套件一起部署到 `NTUSTweb00`（資源群組 `NTUSTlab2026`）。站點透過 `web.config` 的 IIS HttpPlatformHandler 啟動 `serve.py`，以 Waitress 提供 Flask 服務。
 
+`.github/workflows/deploy-azure-test.yml` 在 `dev` 分支有 push 時執行相同的測試與打包流程，並將應用程式部署到 `NTUSTweb00` 的 `test` slot；也可以從 GitHub Actions 手動觸發。
+
 此方法使用**隨部署包提供的 Python**，不依賴 Windows App Service 內建 Python 執行環境；HttpPlatformHandler 必須在目標站點可用。`NTUSTweb00` 目前是 Windows Web App，部署時會確認作業系統。
 
 在 GitHub 儲存庫 **Settings → Secrets and variables → Actions** 確認：
