@@ -35,6 +35,10 @@
 
               <form method="post" action="{{ url_for('index') }}" novalidate>
                 <div class="form-fields">
+                  <div class="field field-full">
+                    <label for="user-name">姓名 <span>NAME</span></label>
+                    <input id="user-name" name="user_name" type="text" maxlength="80" placeholder="例如 王小明" value="{{ user_name }}" required>
+                  </div>
                   <div class="field">
                     <label for="height">身高 <span>HEIGHT</span></label>
                     <div class="input-wrap">
@@ -95,6 +99,25 @@
             <div class="range-row"><span><i class="range-dot high-dot"></i>體重過重</span><strong>24 – 未滿 27</strong></div>
             <div class="range-row"><span><i class="range-dot obese-dot"></i>肥胖</span><strong>27 以上</strong></div>
           </div>
+        </section>
+        <section class="users-section" aria-labelledby="users-title">
+          <div>
+            <span class="section-number">03 / YOUR RECORDS</span>
+            <h2 id="users-title">使用者 BMI 紀錄</h2>
+            <p>點選姓名，查看每次 BMI 數值與計算時間。</p>
+          </div>
+          {% if users %}
+            <div class="user-list">
+              {% for user in users %}
+                <a class="user-link" href="{{ url_for('user_history', user_name=user['user_name']) }}">
+                  <span>{{ user["user_name"] }}</span>
+                  <small>{{ user["record_count"] }} 筆紀錄 ↗</small>
+                </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="empty-users">完成一次計算後，使用者姓名會顯示在這裡。</p>
+          {% endif %}
         </section>
         <p class="disclaimer">此結果僅供成人參考，無法反映肌肉量等個別差異，亦不適用於兒童、青少年或孕婦；若有健康疑慮，請諮詢醫療專業人員。</p>
       </main>

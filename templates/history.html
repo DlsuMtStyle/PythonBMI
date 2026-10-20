@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ user_name }}的 BMI 紀錄 · 好好生活</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="好好生活，回到首頁">
+          <span class="brand-mark" aria-hidden="true">✳</span>
+          好好生活 <span class="brand-en">WELL LIVING</span>
+        </a>
+        <span class="header-note">把健康，從了解自己開始!</span>
+      </header>
+
+      <main class="history-page">
+        <a class="back-link" href="{{ url_for('index') }}">← 回到 BMI 計算器</a>
+        <span class="section-number">BMI HISTORY / 歷史紀錄</span>
+        <h1>{{ user_name }}的 BMI 紀錄</h1>
+        {% if records %}
+          <div class="history-card">
+            <div class="history-row history-heading"><span>BMI 數值</span><span>計算時間</span></div>
+            {% for record in records %}
+              <div class="history-row">
+                <strong>{{ "%.1f"|format(record["bmi"]) }}</strong>
+                <time datetime="{{ record['calculated_at'] }}">{{ record["calculated_at"] }}</time>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="empty-history">找不到這位使用者的 BMI 紀錄。</p>
+        {% endif %}
+      </main>
+      <footer>© 好好生活 <span>TAKE CARE, EVERY DAY.</span></footer>
+    </div>
+  </body>
+</html>
