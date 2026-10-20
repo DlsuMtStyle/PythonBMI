@@ -1,6 +1,6 @@
 # BMI 計算器
 
-使用 Flask 製作的成人 BMI 網頁計算器。輸入身高（公分）和體重（公斤）後，頁面會顯示 BMI（小數點後一位）、體位分類與生活建議。
+使用 Flask 製作的成人 BMI 網頁計算器。輸入姓名、身高（公分）和體重（公斤）後，頁面會顯示 BMI（小數點後一位）、體位分類與生活建議，並將每次成功計算保存到 SQLite。
 
 ## 啟動
 
@@ -14,6 +14,8 @@ python app.py
 ```
 
 接著開啟 http://127.0.0.1:5000/ 。若 PowerShell 不允許啟用虛擬環境，也可以使用 `.\.venv\Scripts\python.exe -m pip install -r requirements.txt` 和 `.\.venv\Scripts\python.exe app.py`。
+
+首頁的「使用者 BMI 紀錄」會列出曾經計算過的姓名；點選姓名即可查看該使用者歷次的 BMI 數值與計算時間。資料庫檔案位於 `instance/bmi.sqlite3`，不會提交到版本控制。
 
 ## 計算方式
 
