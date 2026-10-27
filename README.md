@@ -27,7 +27,7 @@ BMI = 體重（公斤）÷ 身高（公尺）²。分類採臺灣成人體位參
 
 ## 部署到 Azure Web App
 
-`.github/workflows/deploy-azure.yml` 在 `main` 分支的應用程式、測試或 workflow 異動時執行，也可以從 GitHub Actions 手動觸發。流程會在 Windows runner 上執行測試、下載官方 Python 3.14.8 可嵌入版本，將 Python 與相依套件部署到 `NTUSTweb00`（資源群組 `NTUSTlab2026`）的 `staging` slot。部署 job 使用 GitHub `staging` environment；完成後，流程會等待 `production` environment 的核准，再以 Azure CLI 將 `staging` slot 與 production slot swap。站點透過 `web.config` 的 IIS HttpPlatformHandler 啟動 `serve.py`，以 Waitress 提供 Flask 服務。
+`.github/workflows/deploy-azure.yml` 在 `main` 分支的應用程式、測試或 workflow 異動時執行，也可以從 GitHub Actions 手動觸發。流程會在 Windows runner 上執行測試、下載官方 Python 3.14.8 可嵌入版本，將 Python 與相依套件部署到 `NTUSTweb00`（資源群組 `NTUSTlab2026`）的 `staging` slot。workflow 會分成 `deploy-staging` 與 `promote-production` 兩個 job；前者使用 GitHub `staging` environment，後者使用 `production` environment，等待核准後再以 Azure CLI 將 `staging` slot 與 production slot swap。站點透過 `web.config` 的 IIS HttpPlatformHandler 啟動 `serve.py`，以 Waitress 提供 Flask 服務。
 
 `.github/workflows/deploy-azure-test.yml` 在 `dev` 分支有 push 時執行相同的測試與打包流程，並將應用程式部署到 `NTUSTweb00` 的 `test` slot；也可以從 GitHub Actions 手動觸發。
 

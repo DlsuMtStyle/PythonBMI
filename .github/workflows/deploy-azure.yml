@@ -84,7 +84,7 @@ jobs:
           slot-name: ${{ env.AZURE_SLOT_NAME }}
           package: dist
 
-  swap-to-production:
+  promote-production:
     needs: deploy-staging
     environment:
       name: production
